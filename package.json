@@ -10,11 +10,17 @@
     "type": "git",
     "url": "git+https://github.com/joaoladeira0/intro-javascript.git"
   },
-  "keywords": ["java-script","exemplos"],
+  "keywords": [
+    "java-script",
+    "exemplos"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/joaoladeira0/intro-javascript/issues"
   },
-  "homepage": "https://github.com/joaoladeira0/intro-javascript#readme"
+  "homepage": "https://github.com/joaoladeira0/intro-javascript#readme",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
 }
