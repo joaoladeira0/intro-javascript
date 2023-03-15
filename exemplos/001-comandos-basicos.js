@@ -31,3 +31,6 @@ console.log('variavel endereco = ' + typeof(endereco));
 console.log('variavel covid = ' + typeof(covid));
 console.log('variavel dengue = ' + typeof(dengue));
 console.log('variavel exfunc = ' + typeof(exfunc));
+
+//exibir objeto
+console.log(endereco.logradouro + ' ' + endereco.nome_log + ' ' + endereco.n + ' - ' + endereco.bairro);
