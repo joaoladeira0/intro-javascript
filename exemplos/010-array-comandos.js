@@ -1,6 +1,6 @@
 let entrada = require('prompt-sync')(); 
 
-let tarefas = [ 
+let tarefas = [
     {
         id: 1, 
         tarefa: 'Estudar js', 
@@ -32,82 +32,104 @@ do {
     opcao = entrada('Selecione uma opção:');
 
     if (opcao == 1) {
-
-        console.log('----');
-        console.log('TAREFAS PENDENTES');
-        console.log('----');
-
+        console.log('---');
+        console.log('Tarefas pendentes:');
+        console.log('---');
         for (const i in tarefas) {
-
-            if (tarefas[i].realizada == false){
-            console.log('ID: ' + tarefas[i].id)
-            console.log('Tarefa: ' + tarefas[i].tarefa)
-            console.log('Realizada: ' + (!tarefas[i].realizada ? 'Não' : 'Sim')); //!array (é como se fosse array == false)
-            console.log('----');
+            if (tarefas[i].realizada == false) {
+                console.log('ID: ' + tarefas[i].id);
+                console.log('TAREFA: ' + tarefas[i].tarefa);
+                console.log('REALIZADA: ' + (!tarefas[i].realizada ? 'Não' : 'Sim'));
+                console.log('---');
             }
         }
-        console.log(' ')
-        entrada('Digite enter para continuar...')
+        console.log('');
+        entrada('Pressione enter para continuar:');
     }
 
     if (opcao == 2) {
-
-        console.log('----');
-        console.log('TAREFAS REALIZADAS');
-        console.log('----');
-
+        console.log('---');
+        console.log('Tarefas realizadas:');
+        console.log('---');
         for (const i in tarefas) {
-
-            if (tarefas[i].realizada == true){
-                console.log('ID: ' + tarefas[i].id)
-                console.log('Tarefa: ' + tarefas[i].tarefa)
-                console.log('Realizada: ' + (!tarefas[i].realizada ? 'Não' : 'Sim'));
-                console.log('----');
+            if (tarefas[i].realizada == true) {
+                console.log('ID: ' + tarefas[i].id);
+                console.log('TAREFA: ' + tarefas[i].tarefa);
+                console.log('REALIZADA: ' + (tarefas[i].realizada ? 'Sim' : 'Não'));
+                console.log('---');
             }
-        }
-        console.log(' ')
-        entrada('Digite enter para continuar...')
+        } 
+        console.log('');
+        entrada('Pressione enter para continuar:');       
     }
-    
 
-    if (opcao == 3) {
+    if (opcao == 3) { 
         const idCad = tarefas.length + 1;
         const tarefa = entrada('Digite a tarefa a ser realizada: ');
-        const objAdd = {
-            id : idCad,
-            tarefa : tarefa,
-            realizada : false
-        }
-        tarefas.push(objAdd);
+        const objAdd = {                
+            id: idCad, 
+            tarefa: tarefa, 
+            realizada: false                
+        };
+        tarefas.push(objAdd);  
+        console.log('');
         console.log('Tarefa adicionada com sucesso!');
-        console.log(' ');
-        entrada('Digite enter para continuar...');
+        entrada('Pressione enter para continuar:');      
     }
-    
 
     if (opcao == 4) {
+        console.log('Tarefas a serem concluídas:');
         for (const i in tarefas) {
             if (!tarefas[i].realizada) {
-                console.log(tarefas[i].id + ' ' + tarefas[i].tarefa);
-            }
-        }   
-
-        const tConcluir = parseInt(entrada('Digite o ID da tarefa que será concluida')) - 1;
-        
-        const objAtualizar = {
-            id: tarefas[tConcluir].id,
-            tarefa: tarefas[tConcluir].tarefa,
-            realizada: true
+                console.log(tarefas[i].id + '- ' + tarefas[i].tarefa);
+            }            
         }
-        tarefas[tConcluir] = objAtualizar;
+        const tConcluir = parseInt(entrada('Digite o ID da tarefa que será concluída: ')) - 1;
+        if (tConcluir < 0 || tConcluir > tarefas.length){
+            console.log("ID Invalido")
+        } else {
+            const objAtualizar = {
+                id: tarefas[tConcluir].id, 
+                tarefa: tarefas[tConcluir].tarefa, 
+                realizada: true              
+            }
+    
+            tarefas[tConcluir] = objAtualizar;
+            
+            console.log('');
+            console.log('Tarefa concluída com sucesso!');
+            entrada('Pressione enter para continuar:'); 
+        }
+      
 
-        console.log('');
-        console.log('Tarefa concluida com sucesso!');
-        entrada('Digite enter para continuar...');
+       
     }
 
     if (opcao == 5) {
+        console.log('Tarefas a serem excluídas:');
+
+        for (const i in tarefas) {
+            if (tarefas[i].realizada) {
+                console.log(tarefas[i].id + ' - ' + tarefas[i].tarefa);
+            }            
+        }
         
+        const t_excluir = entrada('Insira o ID da tarefa a ser excluída: ');
+        let tempArray = tarefas;
+        tarefas = tempArray.filter(item => item.id != t_excluir);
+
+        // resetar o array
+        tempArray = [];
+        for (const i in tarefas) {
+            tempArray.push({
+                id: parseInt(i) + 1, 
+                tarefa: tarefas[i].tarefa, 
+                realizada: tarefas[i].realizada                   
+            });
+        }
+        tarefas = tempArray;
+
+        entrada('Item excluído com sucesso!');
     }
 
 } while (opcao != 0); 
