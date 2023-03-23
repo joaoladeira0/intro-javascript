@@ -85,26 +85,35 @@ do {
             }            
         }
         const tConcluir = parseInt(entrada('Digite o ID da tarefa que será concluída: ')) - 1;
-
-        const objAtualizar = {
-            id: tarefas[tConcluir].id, 
-            tarefa: tarefas[tConcluir].tarefa, 
-            realizada: true              
+        if (tConcluir < 0 || tConcluir > tarefas.length){
+            console.log("ID Invalido")
+        } else {
+            const objAtualizar = {
+                id: tarefas[tConcluir].id, 
+                tarefa: tarefas[tConcluir].tarefa, 
+                realizada: true              
+            }
+    
+            tarefas[tConcluir] = objAtualizar;
+            
+            console.log('');
+            console.log('Tarefa concluída com sucesso!');
+            entrada('Pressione enter para continuar:'); 
         }
-        tarefas[tConcluir] = objAtualizar;
+      
 
-        console.log('');
-        console.log('Tarefa concluída com sucesso!');
-        entrada('Pressione enter para continuar:'); 
+       
     }
 
     if (opcao == 5) {
         console.log('Tarefas a serem excluídas:');
+
         for (const i in tarefas) {
             if (tarefas[i].realizada) {
-                console.log(tarefas[i].id + '- ' + tarefas[i].tarefa);
+                console.log(tarefas[i].id + ' - ' + tarefas[i].tarefa);
             }            
         }
+        
         const t_excluir = entrada('Insira o ID da tarefa a ser excluída: ');
         let tempArray = tarefas;
         tarefas = tempArray.filter(item => item.id != t_excluir);
